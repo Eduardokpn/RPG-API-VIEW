@@ -1,3 +1,16 @@
+@Html.ActionLink("Clique aqui para um embate com armas", "Index", "Disputas", 
+    null, new {@class = "btn btn-warning "});
+
+@Html.ActionLink("Clique aqui para um embate com Habilidades", "IndexHabilidades", "Disputas",
+    null, new { @class = "btn btn-dark " });
+
+ @Html.ActionLink("Clique aqui para um combate em grupo!!!", "DisputaGeral", "Disputas",
+    null, new { @class = "btn-danger" });
+
+@Html.ActionLink("Zerar o ranking e restaurar pontos vida", "zerarRankingRestaurarVidas", "Personagens",
+    null, new { "btn btn-secondary", onclick = "return confirm('Deseja realmente realizar esta ação ?');"})
+
+
 <!--Namespace da classe de Modelo para esta view-->
 @model IEnumerable<RpgMvc.Models.PersonagemViewModel>
 <!--Inclua os TempData para Sucesso e Erro aqui, conforme exemplo na view de Autenticação-->
