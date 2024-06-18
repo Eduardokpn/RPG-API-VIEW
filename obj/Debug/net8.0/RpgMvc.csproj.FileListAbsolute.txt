@@ -34,3 +34,15 @@ D:\2DS -EVB\DS\RpgMvc\obj\Debug\net8.0\refint\RpgMvc.dll
 D:\2DS -EVB\DS\RpgMvc\obj\Debug\net8.0\RpgMvc.pdb
 D:\2DS -EVB\DS\RpgMvc\obj\Debug\net8.0\RpgMvc.genruntimeconfig.cache
 D:\2DS -EVB\DS\RpgMvc\obj\Debug\net8.0\ref\RpgMvc.dll
+D:\2D-BEV\DS\RPG-API-VIEW\obj\Debug\net8.0\RpgMvc.csproj.AssemblyReference.cache
+D:\2D-BEV\DS\RPG-API-VIEW\obj\Debug\net8.0\RpgMvc.GeneratedMSBuildEditorConfig.editorconfig
+D:\2D-BEV\DS\RPG-API-VIEW\obj\Debug\net8.0\RpgMvc.AssemblyInfoInputs.cache
+D:\2D-BEV\DS\RPG-API-VIEW\obj\Debug\net8.0\RpgMvc.AssemblyInfo.cs
+D:\2D-BEV\DS\RPG-API-VIEW\obj\Debug\net8.0\RpgMvc.csproj.CoreCompileInputs.cache
+D:\2D-BEV\DS\RPG-API-VIEW\obj\Debug\net8.0\RpgMvc.MvcApplicationPartsAssemblyInfo.cache
+D:\2D-BEV\DS\RPG-API-VIEW\obj\Debug\net8.0\RpgMvc.RazorAssemblyInfo.cache
+D:\2D-BEV\DS\RPG-API-VIEW\obj\Debug\net8.0\RpgMvc.RazorAssemblyInfo.cs
+D:\2D-BEV\DS\RPG-API-VIEW\obj\Debug\net8.0\RpgMvc.sourcelink.json
+D:\2D-BEV\DS\RPG-API-VIEW\obj\Debug\net8.0\RpgMvc.dll
+D:\2D-BEV\DS\RPG-API-VIEW\obj\Debug\net8.0\refint\RpgMvc.dll
+D:\2D-BEV\DS\RPG-API-VIEW\obj\Debug\net8.0\RpgMvc.pdb
