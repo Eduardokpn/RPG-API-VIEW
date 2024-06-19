@@ -1,7 +1,11 @@
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+<<<<<<< HEAD
 using RPG_API_VIEW.Models;
+=======
+using RpgMv.Models;
+>>>>>>> ab6cf85b7cbfd30d5c50ee4890a5e7787c613b04
 using RpgMvc.Models;
 
 
@@ -9,7 +13,7 @@ namespace RpgMvc.Controllers
 {
     public class DisputasController : Controller
     {
-        public string uriBase = "xyz/Disputas/";
+        public string uriBase = "http://luizsouza.somee.com/RpgApi/Disputas/";
         //Substituir pelo no do site da api
 
         [HttpGet]
@@ -21,7 +25,7 @@ namespace RpgMvc.Controllers
                 string token = HttpContext.Session.GetString("SessionTokenUsuario");
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-                string uriBuscaPersonagens = "http://xyz.somee.com/RpgApi/Personagens/GetAll";
+                string uriBuscaPersonagens = "http://luizsouza.somee.com/RpgApi/Personagens/GetAll";
                 HttpResponseMessage response = await httpClient.GetAsync(uriBuscaPersonagens);
                 string serialized = await response.Content.ReadAsStringAsync();
 
@@ -45,12 +49,32 @@ namespace RpgMvc.Controllers
                 return RedirectToAction("Index");
             }
         }
+<<<<<<< HEAD
+=======
+        
+    
+>>>>>>> ab6cf85b7cbfd30d5c50ee4890a5e7787c613b04
 
 
+<<<<<<< HEAD
         [HttpPost]
         public async Task<ActionResult> IndexAsync(DisputaViewModel disputa)
         {
             try
+=======
+            var content = new StringContent(JsonConvert.SerializeObject(disputa));
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/Json");
+            HttpResponseMessage response = await httpClient.PostAsync(uriBase + uriComplementar, content);
+            string serialized = await response.Content.ReadAsStringAsync();
+
+            if( response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                disputa = await Task.Run(() => JsonConvert.DeserializeObject<DisputaViewModel>(serialized));
+                TempData["Mensagem"] = disputa.Narracao;
+                return RedirectToAction("Index", "Personagens");
+            }
+            else 
+>>>>>>> ab6cf85b7cbfd30d5c50ee4890a5e7787c613b04
             {
                 HttpClient httpClient = new HttpClient();
                 string uriComplementar = "Arma";
@@ -87,7 +111,7 @@ namespace RpgMvc.Controllers
                 string token = HttpContext.Session.GetString("SessionTokenUsuario");
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-                string uriBuscaPersonagens = "http://xyz.somee.com/RpgApi/Personagens/GetAll";
+                string uriBuscaPersonagens = "http://luizsouza.somee.com/RpgApi/Personagens/GetAll";
                 HttpResponseMessage response = await httpClient.GetAsync(uriBuscaPersonagens);
                 string serialized = await response.Content.ReadAsStringAsync();
 
@@ -103,13 +127,13 @@ namespace RpgMvc.Controllers
                 else
                     throw new System.Exception(serialized);
 
-                string uriBuscaHabilidades = "http://xyz.somee.com/RpgApi/PersonagemHabilidades/GetHabilidades";
+                string uriBuscaHabilidades = "http://luizsouza.somee.com/RpgApi/PersonagemHabilidades/GetHabilidades";
                 response = await httpClient.GetAsync(uriBuscaHabilidades);
                 serialized = await response.Content.ReadAsStringAsync();
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    List<HabilidadeViewModel> listaPersonagem = await Task.Run(() =>
+                    List<HabilidadeViewModel> listaHabilidades = await Task.Run(() =>
                         JsonConvert.DeserializeObject<List<HabilidadeViewModel>>(serialized));
                     ViewBag.ListaHabilidades = listaPersonagem;
                 }
@@ -186,7 +210,4 @@ namespace RpgMvc.Controllers
 
 
 }
-
-
-
-//TODO: PAREI NO SLIDE *6*
+}
