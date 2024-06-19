@@ -1,6 +1,7 @@
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using RpgMv.Models;
 using RpgMvc.Models;
 
 
@@ -8,7 +9,7 @@ namespace RpgMvc.Controllers
 {
     public class DisputasController : Controller
     {
-        public string uriBase = "xyz/Disputas/";
+        public string uriBase = "http://luizsouza.somee.com/RpgApi/Disputas/";
         //Substituir pelo no do site da api
 
         [HttpGet]
@@ -20,7 +21,7 @@ namespace RpgMvc.Controllers
                 string token = HttpContext.Session.GetString("SessionTokenUsuario");
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-                string uriBuscaPersonagens = "http://xyz.somee.com/RpgApi/Personagens/GetAll";
+                string uriBuscaPersonagens = "http://luizsouza.somee.com/RpgApi/Personagens/GetAll";
                 HttpResponseMessage response = await httpClient.GetAsync(uriBuscaPersonagens);
                 string serialized = await response.Content.ReadAsStringAsync();
 
@@ -43,7 +44,7 @@ namespace RpgMvc.Controllers
             }
         }
         
-    }
+    
 
     [HttpPost]
     public async Task<ActionResult> IndexAsync(DisputaViewModel disputa)
@@ -52,14 +53,15 @@ namespace RpgMvc.Controllers
             HttpClient httpClient = new HttpClient();
             string uriComplementar = "Arma";
 
-            var Content = new StringContent(JsonConvert.SerializeObject(disputa));
-            Content.Headers.ContentType = new MediaTypeHeaderValue("application/Json");
-            HttpResponseMessage response = await HttpClient.PostAsync(uriBase + uriComplementar, content);
+            var content = new StringContent(JsonConvert.SerializeObject(disputa));
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/Json");
+            HttpResponseMessage response = await httpClient.PostAsync(uriBase + uriComplementar, content);
             string serialized = await response.Content.ReadAsStringAsync();
 
-            if( response.StatusCode == System.Net.HttpStatusCode.OK) {
-                disputa = await Task.Run(() => JsonConvert.DeserializeObject<List<PersonagemViewModel>>(serialized));
-                TempData["Message"] = Disputa.Narracao;
+            if( response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                disputa = await Task.Run(() => JsonConvert.DeserializeObject<DisputaViewModel>(serialized));
+                TempData["Mensagem"] = disputa.Narracao;
                 return RedirectToAction("Index", "Personagens");
             }
             else 
@@ -83,7 +85,7 @@ namespace RpgMvc.Controllers
                 string token = HttpContext.Session.GetString("SessionTokenUsuario");
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-                string uriBuscaPersonagens = "http://xyz.somee.com/RpgApi/Personagens/GetAll";
+                string uriBuscaPersonagens = "http://luizsouza.somee.com/RpgApi/Personagens/GetAll";
                 HttpResponseMessage response = await httpClient.GetAsync(uriBuscaPersonagens);
                 string serialized = await response.Content.ReadAsStringAsync();
 
@@ -97,13 +99,13 @@ namespace RpgMvc.Controllers
                 } else
                     throw new System.Exception(serialized);
 
-                string uriBuscaHabilidades = "http://xyz.somee.com/RpgApi/PersonagemHabilidades/GetHabilidades";
+                string uriBuscaHabilidades = "http://luizsouza.somee.com/RpgApi/PersonagemHabilidades/GetHabilidades";
                 response = await httpClient.GetAsync(uriBuscaHabilidades);
                 serialized = await response.Content.ReadAsStringAsync();
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK) 
                 {
-                    List<HabilidadeViewModel> listaPersonagem = await Task.Run(() =>
+                    List<HabilidadeViewModel> listaHabilidades = await Task.Run(() =>
                         JsonConvert.DeserializeObject<List<HabilidadeViewModel>>(serialized));
                     ViewBag.ListaHabilidades = listaHabilidades;
                 }
@@ -120,7 +122,4 @@ namespace RpgMvc.Controllers
         }
     }
 }
-
-
-
-//TODO: PAREI NO SLIDE *6*
+}

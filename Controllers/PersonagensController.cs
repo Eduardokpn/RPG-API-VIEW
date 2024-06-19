@@ -26,7 +26,7 @@ namespace RpgMvc.Controllers
 
         [HttpGet]
 
-        public async Task<ActionResult> IndexAsyc()
+        public async Task<ActionResult> IndexAsync()
         {
             try
             {
@@ -53,13 +53,10 @@ namespace RpgMvc.Controllers
             catch (System.Exception ex)
             {
                 TempData["MensagemErro"] = ex.Message;
-                return RedirectToAction("Index");
+                return RedirectToAction("Usuarios", "Index");
 
-
+ 
             }
-
-
-
 
         }
 
@@ -233,7 +230,7 @@ namespace RpgMvc.Controllers
                     string token = HttpContext.Session.GetString("SessionTokenUsuarios");
                     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                                       
-                    string uriBuscarPersonagens = "htto://xyz.somee.com/RpgApi/Personagens/GetAll";
+                    string uriBuscarPersonagens = "htto://luizsouza.somee.com/RpgApi/Personagens/GetAll";
                     HttpResponseMessage response = await httpClient.GetAsync(uriBuscarPersonagens);
                     
                     string serialized = await response.Content.ReadAsStringAsync();
@@ -241,7 +238,7 @@ namespace RpgMvc.Controllers
                     List<PersonagemViewModel> listaPersonagem = await Task.Run(() =>
                         JsonConvert.DeserializeObject<List<PersonagemViewModel>>(serialized));
                     
-                    string uriDisputa = "http://xyz.somee.com/Rpgi/Disputas/DisputaEmGrupo";
+                    string uriDisputa = "http://luizsouza.somee.com/Rpgi/Disputas/DisputaEmGrupo";
                     DisputaViewModel disputa = new DisputaViewModel();
                     disputa.ListaIdPersonagens = new List<int>();
                     disputa.ListaIdPersonagens.AddRange(listaPersonagem.Select(p => p.Id));
